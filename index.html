@@ -88,9 +88,9 @@
       min-height: 420px;
       background:
         linear-gradient(110deg, rgba(7,11,10,.92), rgba(7,11,10,.20)),
-        url("assets/hecate.jpeg");
+        url("assets/hecate.jpg");
       background-size: cover;
-      background-position: center;
+      background-position: center 30%;
     }
     .hero::after{
       content:"";
@@ -179,6 +179,7 @@
     }
 
     section{ margin: 22px 0; }
+
     .grid{
       display:grid;
       grid-template-columns: repeat(3, 1fr);
@@ -195,12 +196,26 @@
       box-shadow: 0 16px 40px rgba(0,0,0,.35);
       overflow:hidden;
     }
+
+    /* Clave: ratio consistente + altura razonable */
     .card .img{
-      height: 170px;
+      aspect-ratio: 16 / 9;
+      min-height: 170px;
+      max-height: 220px;
       background-size: cover;
-      background-position:center;
+      background-repeat:no-repeat;
+      background-position:center 35%;
       border-bottom:1px solid rgba(255,255,255,.10);
     }
+
+    /* Ajustes por imagen (evita recortes feos) */
+    .img.medusa { background-position: center 18%; }
+    .img.quimera{ background-position: center 35%; }
+    .img.sirena { background-position: center 40%; }
+    .img.atenea { background-position: center 35%; }
+    .img.hecate { background-position: center 22%; }
+    .img.apolo  { background-position: center 30%; }
+
     .card .body{ padding:14px 14px 16px; }
     .card h2{
       margin:0 0 6px;
@@ -214,11 +229,52 @@
       line-height: 1.55;
     }
 
+    /* Footer más “acabado” */
     footer{
-      margin: 28px 0 36px;
+      margin: 26px 0 38px;
+      padding-top: 18px;
+      border-top: 1px solid rgba(255,255,255,.10);
       color: var(--muted2);
       font-size: 13px;
       text-align:center;
+    }
+    .footer-inner{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      flex-wrap:wrap;
+    }
+    .footer-left{
+      display:flex;
+      align-items:center;
+      gap:10px;
+    }
+    .sig{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:7px 10px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.05);
+    }
+    .footer-links{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      justify-content:flex-end;
+    }
+    .footer-links a{
+      color: var(--muted2);
+      padding:6px 8px;
+      border-radius:10px;
+      border:1px solid transparent;
+    }
+    .footer-links a:hover{
+      color: var(--text);
+      border-color: rgba(255,255,255,.10);
+      background: rgba(255,255,255,.04);
     }
   </style>
 </head>
@@ -265,7 +321,7 @@
     <section id="criaturas">
       <div class="grid">
         <article class="card">
-          <div class="img" style="background-image:url('assets/medusa.jpg');"></div>
+          <div class="img medusa" style="background-image:url('assets/medusa.jpg');"></div>
           <div class="body">
             <h2>Medusa</h2>
             <p>Mirada que inmoviliza. Mito convertido en icono.</p>
@@ -273,7 +329,7 @@
         </article>
 
         <article class="card">
-          <div class="img" style="background-image:url('assets/quimera.jpg');"></div>
+          <div class="img quimera" style="background-image:url('assets/quimera.jpg');"></div>
           <div class="body">
             <h2>Quimera</h2>
             <p>La mezcla imposible. La amenaza sin forma única.</p>
@@ -281,7 +337,7 @@
         </article>
 
         <article class="card">
-          <div class="img" style="background-image:url('assets/sirena.jpg');"></div>
+          <div class="img sirena" style="background-image:url('assets/sirena.jpg');"></div>
           <div class="body">
             <h2>Sirenas</h2>
             <p>Canto y peligro. Lo bello cuando atrae demasiado.</p>
@@ -293,7 +349,7 @@
     <section id="dioses">
       <div class="grid">
         <article class="card">
-          <div class="img" style="background-image:url('assets/atenea.jpg');"></div>
+          <div class="img atenea" style="background-image:url('assets/atenea.jpg');"></div>
           <div class="body">
             <h2>Atenea</h2>
             <p>Estrategia y criterio. Inteligencia aplicada.</p>
@@ -301,7 +357,7 @@
         </article>
 
         <article class="card">
-          <div class="img" style="background-image:url('assets/hecate.jpg');"></div>
+          <div class="img hecate" style="background-image:url('assets/hecate.jpg');"></div>
           <div class="body">
             <h2>Hécate</h2>
             <p>Umbrales y noche. Lo liminal como fuerza.</p>
@@ -309,7 +365,7 @@
         </article>
 
         <article class="card">
-          <div class="img" style="background-image:url('assets/apolo.jpg');"></div>
+          <div class="img apolo" style="background-image:url('assets/apolo.jpg');"></div>
           <div class="body">
             <h2>Apolo</h2>
             <p>Luz, forma y música. Orden y precisión.</p>
@@ -319,12 +375,21 @@
     </section>
 
     <footer>
-      © <span id="year"></span> Daniela
+      <div class="wrap footer-inner">
+        <div class="footer-left">
+          <span class="sig">© <span id="year"></span> Daniela</span>
+          <span>Bestiario</span>
+        </div>
+        <div class="footer-links">
+          <a href="#criaturas">Criaturas</a>
+          <a href="#dioses">Dioses</a>
+          <a href="#">Arriba</a>
+        </div>
+      </div>
     </footer>
   </main>
 
   <script>
-    // Año automático
     document.getElementById("year").textContent = new Date().getFullYear();
   </script>
 </body>
