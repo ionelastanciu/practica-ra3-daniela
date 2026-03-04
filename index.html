@@ -1,134 +1,376 @@
-
+<!doctype html>
+<html lang="es">
+<head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>RA3 - Daniela</title>
-
+  <title>Bestiario · Daniela</title>
+  <meta name="description" content="Un bestiario personal inspirado en criaturas mitológicas y dioses del mundo antiguo." />
   <style>
-    body {
-      margin: 0;
-      font-family: "Georgia", serif;
-      background: linear-gradient(180deg, #d7f0e4, #f0f7ff);
-      color: #2e3d2f;
+    :root{
+      --bg0:#070b0a;
+      --bg1:#0b1411;
+      --card:rgba(255,255,255,.08);
+      --card2:rgba(255,255,255,.06);
+      --stroke:rgba(255,255,255,.14);
+      --text:rgba(255,255,255,.92);
+      --muted:rgba(255,255,255,.70);
+      --muted2:rgba(255,255,255,.55);
+      --shadow: 0 20px 60px rgba(0,0,0,.45);
+      --r: 18px;
+      --max: 1080px;
     }
 
-    header {
-      text-align: center;
-      padding: 3rem 1rem;
-      background: url("https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=1600&q=80") center/cover no-repeat;
-      color: white;
-      text-shadow: 0 2px 6px rgba(0,0,0,0.6);
+    *{ box-sizing:border-box; }
+    html,body{ height:100%; }
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+      color:var(--text);
+      background:
+        radial-gradient(1200px 700px at 12% 12%, rgba(98,255,208,.10), transparent 60%),
+        radial-gradient(900px 600px at 88% 18%, rgba(168,125,255,.10), transparent 55%),
+        radial-gradient(900px 700px at 50% 100%, rgba(255,218,138,.08), transparent 60%),
+        linear-gradient(180deg, var(--bg0), var(--bg1));
+      overflow-x:hidden;
     }
 
-    h1 {
-      font-size: 3rem;
-      margin: 0;
+    a{ color:inherit; text-decoration:none; }
+    .wrap{ width:min(var(--max), calc(100% - 40px)); margin:0 auto; }
+
+    header{
+      position:sticky; top:0; z-index:10;
+      backdrop-filter: blur(12px);
+      background: rgba(7,11,10,.45);
+      border-bottom:1px solid rgba(255,255,255,.10);
+    }
+    .topbar{
+      display:flex; align-items:center; justify-content:space-between;
+      padding:14px 0;
+      gap:14px;
+    }
+    .brand{
+      display:flex; align-items:center; gap:10px; min-width:220px;
+      letter-spacing:.2px;
+    }
+    .badge{
+      width:34px; height:34px; border-radius:12px;
+      display:grid; place-items:center;
+      background: linear-gradient(135deg, rgba(98,255,208,.18), rgba(168,125,255,.18));
+      border:1px solid rgba(255,255,255,.18);
+      box-shadow: 0 10px 30px rgba(0,0,0,.35);
+      font-size:16px;
+    }
+    .brand strong{ font-weight:650; }
+    .brand span{ color:var(--muted2); font-size:13px; }
+
+    nav{
+      display:flex; gap:14px; flex-wrap:wrap; justify-content:flex-end;
+    }
+    nav a{
+      padding:8px 10px;
+      border-radius:12px;
+      color:var(--muted);
+      border:1px solid transparent;
+    }
+    nav a:hover{
+      color:var(--text);
+      border-color:rgba(255,255,255,.12);
+      background: rgba(255,255,255,.05);
     }
 
-    p.subtitle {
-      font-size: 1.2rem;
-      margin-top: .5rem;
+    .hero{
+      margin:26px 0 18px;
+      border-radius: calc(var(--r) + 8px);
+      overflow:hidden;
+      border:1px solid rgba(255,255,255,.14);
+      box-shadow: var(--shadow);
+      position:relative;
+      min-height: 420px;
+      background:
+        linear-gradient(110deg, rgba(7,11,10,.92), rgba(7,11,10,.20)),
+        url("https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=2000&q=80");
+      background-size: cover;
+      background-position: center;
+    }
+    .hero::after{
+      content:"";
+      position:absolute; inset:0;
+      background:
+        radial-gradient(700px 420px at 20% 30%, rgba(255,218,138,.10), transparent 60%),
+        radial-gradient(600px 420px at 72% 38%, rgba(168,125,255,.12), transparent 60%),
+        linear-gradient(180deg, rgba(0,0,0,.08), rgba(0,0,0,.60));
+      pointer-events:none;
+    }
+    .hero-inner{
+      position:relative; z-index:1;
+      padding:44px 28px 28px;
+      display:grid;
+      grid-template-columns: 1.2fr .8fr;
+      gap:22px;
+      align-items:end;
+    }
+    @media (max-width: 860px){
+      .hero-inner{ grid-template-columns: 1fr; padding:36px 20px 20px; }
+      .brand{ min-width:auto; }
+    }
+    .kicker{
+      display:inline-flex; align-items:center; gap:8px;
+      padding:8px 12px;
+      border-radius:999px;
+      background: rgba(255,255,255,.06);
+      border:1px solid rgba(255,255,255,.14);
+      color:var(--muted);
+      font-size:13px;
+    }
+    h1{
+      margin:14px 0 10px;
+      font-size: clamp(28px, 4vw, 44px);
+      line-height: 1.08;
+      letter-spacing: -0.6px;
+    }
+    .lead{
+      margin:0;
+      color: var(--muted);
+      font-size: 15.5px;
+      line-height: 1.55;
+      max-width: 62ch;
+    }
+    .cta-row{
+      margin-top:18px;
+      display:flex; gap:10px; flex-wrap:wrap;
+    }
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center;
+      gap:10px;
+      padding:10px 14px;
+      border-radius: 14px;
+      border:1px solid rgba(255,255,255,.16);
+      background: rgba(255,255,255,.06);
+      color: var(--text);
+      font-weight:600;
+      font-size:14px;
+    }
+    .btn:hover{ background: rgba(255,255,255,.10); }
+    .btn.primary{
+      background: linear-gradient(135deg, rgba(255,218,138,.16), rgba(168,125,255,.16));
+      border-color: rgba(255,255,255,.18);
     }
 
-    .container {
-      max-width: 900px;
-      margin: 2rem auto;
-      padding: 0 1rem;
+    .hero-card{
+      align-self:stretch;
+      border-radius: var(--r);
+      background: rgba(7,11,10,.48);
+      border:1px solid rgba(255,255,255,.14);
+      padding:16px;
+      backdrop-filter: blur(10px);
+    }
+    .hero-card h3{
+      margin:0 0 8px;
+      font-size:14px;
+      letter-spacing:.2px;
+      color: var(--muted);
+      font-weight:650;
+    }
+    .hero-card p{
+      margin:0;
+      font-size:14px;
+      color: var(--muted);
+      line-height:1.55;
+    }
+    .hero-card .quote{
+      margin-top:10px;
+      padding:10px 12px;
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,.10);
+      background: rgba(0,0,0,.16);
+      color: var(--muted2);
+      font-size:13px;
+      line-height:1.5;
     }
 
-    .card-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 1.5rem;
+    section{ margin: 22px 0; }
+    .grid{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap:14px;
+    }
+    @media (max-width: 960px){
+      .grid{ grid-template-columns: 1fr; }
     }
 
-    .card {
-      background: white;
-      border-radius: 12px;
-      overflow: hidden;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-      transition: transform .3s ease;
+    .card{
+      border-radius: var(--r);
+      border:1px solid rgba(255,255,255,.14);
+      background: linear-gradient(180deg, var(--card), var(--card2));
+      box-shadow: 0 16px 40px rgba(0,0,0,.35);
+      overflow:hidden;
+    }
+    .card .img{
+      height: 170px;
+      background-size: cover;
+      background-position:center;
+      border-bottom:1px solid rgba(255,255,255,.10);
+    }
+    .card .body{ padding:14px 14px 16px; }
+    .card h2{
+      margin:0 0 6px;
+      font-size:16px;
+      letter-spacing:-.2px;
+    }
+    .card p{
+      margin:0;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.55;
     }
 
-    .card:hover {
-      transform: scale(1.03);
+    .panel{
+      border-radius: var(--r);
+      border:1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.05);
+      box-shadow: 0 16px 40px rgba(0,0,0,.30);
+      padding:16px;
+    }
+    .panel h2{ margin:0 0 10px; font-size:16px; }
+    .list{
+      margin:0; padding:0; list-style:none;
+      display:grid; gap:8px;
+    }
+    .list li{
+      display:flex; gap:10px; align-items:flex-start;
+      padding:10px 12px;
+      border-radius: 14px;
+      border:1px solid rgba(255,255,255,.10);
+      background: rgba(0,0,0,.15);
+      color: var(--muted);
+      font-size:14px;
+      line-height: 1.45;
+    }
+    .dot{
+      width:10px; height:10px; border-radius:999px;
+      margin-top:4px;
+      background: linear-gradient(135deg, rgba(255,218,138,.70), rgba(168,125,255,.70));
+      box-shadow: 0 8px 22px rgba(0,0,0,.35);
+      flex: 0 0 auto;
     }
 
-    .card img {
-      width: 100%;
-      height: 180px;
-      object-fit: cover;
-    }
-
-    .card-content {
-      padding: 1rem;
-    }
-
-    footer {
-      text-align: center;
-      padding: 2rem;
-      font-size: .9rem;
-      color: #4a5a4a;
+    footer{
+      margin: 28px 0 36px;
+      color: var(--muted2);
+      font-size: 13px;
+      text-align:center;
     }
   </style>
 </head>
 
 <body>
-  <h1>RA3 - GitHub Pages</h1>
-  <p>Repo: practica-ra3-daniela</p>
-
   <header>
-    <h1>RA3 - GitHub Pages</h1>
-    <p class="subtitle">Naturaleza, magia y criaturas míticas</p>
+    <div class="wrap topbar">
+      <div class="brand">
+        <div class="badge">🜁</div>
+        <div>
+          <strong>Bestiario</strong><br />
+          <span>criaturas & dioses del mundo antiguo</span>
+        </div>
+      </div>
+      <nav>
+        <a href="#criaturas">Criaturas</a>
+        <a href="#dioses">Dioses</a>
+        <a href="#notas">Notas</a>
+      </nav>
+    </div>
   </header>
 
-  <div class="container">
-    <h2>🌲 Bienvenida a tu pequeño bosque mágico</h2>
-    <p>
-      Este es tu espacio personal en GitHub Pages.  
-      Aquí conviven la naturaleza y seres fantásticos que habitan entre los árboles, la niebla y la luz.
-    </p>
-
-    <h3>✨ Criaturas del bosque</h3>
-
-    <div class="card-grid">
-
-      <div class="card">
-        <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=800&q=80" alt="Hada en el bosque">
-        <div class="card-content">
-          <h4>Hada del Alba</h4>
-          <p>Seres diminutos que protegen los primeros rayos de luz entre las hojas.</p>
+ <main class="wrap">
+  <div class="hero" role="banner" aria-label="Portada mitológica">
+    <div class="hero-inner">
+      <div>
+        <div class="kicker">🌙 mitología · bestiario personal</div>
+        <h1>Bestiario.</h1>
+        <p class="lead">
+          Criaturas, dioses y símbolos antiguos. Una colección breve, visual y sin ruido.
+        </p>
+        <div class="cta-row">
+          <a class="btn primary" href="#criaturas">Criaturas</a>
+          <a class="btn" href="#dioses">Dioses</a>
         </div>
       </div>
 
-      <div class="card">
-        <img src="https://images.unsplash.com/photo-1500534623283-312aade485b7?auto=format&fit=crop&w=800&q=80" alt="Bosque mágico">
-        <div class="card-content">
-          <h4>Espíritu del Bosque</h4>
-          <p>Guardianes antiguos que velan por el equilibrio natural.</p>
+      <aside class="hero-card">
+        <h3>Fragmentos</h3>
+        <p>
+          Entre lo sagrado y lo salvaje: historias que sobreviven al tiempo, nombres que no se gastan.
+        </p>
+        <div class="quote">
+          “Lo antiguo no desaparece. Cambia de forma.”
         </div>
-      </div>
-
-      <div class="card">
-        <img src="https://images.unsplash.com/photo-1520697222862-0f3d47f1d85a?auto=format&fit=crop&w=800&q=80" alt="Criatura mítica">
-        <div class="card-content">
-          <h4>Ciervo Estelar</h4>
-          <p>Una criatura noble que aparece solo en noches claras y silenciosas.</p>
-        </div>
-      </div>
-
+      </aside>
     </div>
-
-    <p style="margin-top:2rem;">
-      Repo: <strong>practica-ra3-daniela</strong>
-    </p>
   </div>
 
-  <footer>
-    Creado con 🌿 y un toque de magia.
-  </footer>
+  <section id="criaturas">
+    <div class="grid">
+      <article class="card">
+        <div class="img" style="background-image:url('https://images.unsplash.com/photo-1520975958225-3f61d2b4b6e6?auto=format&fit=crop&w=1600&q=80');"></div>
+        <div class="body">
+          <h2>Medusa</h2>
+          <p>Mirada que inmoviliza. Mito de belleza, miedo y castigo convertido en símbolo.</p>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="img" style="background-image:url('https://images.unsplash.com/photo-1518791841217-8f162f1e1131?auto=format&fit=crop&w=1600&q=80');"></div>
+        <div class="body">
+          <h2>Quimera</h2>
+          <p>La mezcla imposible. La amenaza cuando no tiene una sola cara.</p>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="img" style="background-image:url('https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1600&q=80');"></div>
+        <div class="body">
+          <h2>Sirenas</h2>
+          <p>Canto y peligro. La promesa que atrae justo donde no conviene mirar.</p>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section id="dioses">
+    <div class="grid">
+      <article class="card">
+        <div class="img" style="background-image:url('https://images.unsplash.com/photo-1520975916090-3105956dac38?auto=format&fit=crop&w=1600&q=80');"></div>
+        <div class="body">
+          <h2>Atenea</h2>
+          <p>Estrategia y criterio. Inteligencia aplicada cuando toca decidir.</p>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="img" style="background-image:url('https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=1600&q=80');"></div>
+        <div class="body">
+          <h2>Hécate</h2>
+          <p>Umbrales y noche. La fuerza de lo liminal: lo que no se nombra fácil.</p>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="img" style="background-image:url('https://images.unsplash.com/photo-1459478309853-2c33a60058e7?auto=format&fit=crop&w=1600&q=80');"></div>
+        <div class="body">
+          <h2>Apolo</h2>
+          <p>Luz y forma. Orden, música y precisión, sin necesidad de exceso.</p>
+        </div>
+      </article>
+    </div>
+  </section>
+
+    <footer>
+      © <span id="year"></span> Daniela
+    </footer>
+  </main>
 
   <script>
-    // Mini detalle: año automático
+    // Año automático
     document.getElementById("year").textContent = new Date().getFullYear();
   </script>
 </body>
